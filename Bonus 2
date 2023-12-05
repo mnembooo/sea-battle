@@ -1,0 +1,27 @@
+def get_shot(target_board):
+    while True:
+        try:
+            shot = input("Enter your shot (e.g., A1): ").upper()
+            if len(shot) == 2 and shot[0] in 'ABCDEFG' and shot[1] in '1234567':
+                col = ord(shot[0]) - ord('A')
+                row = int(shot[1]) - 1
+                if target_board[row][col] == " ":
+                    return row, col
+                else:
+                    print("You've already shot here. Try a different spot.")
+            else:
+                print("Invalid input. Please enter a letter A-G followed by a number 1-7.")
+        except ValueError:
+            print("Invalid input. Please enter a letter A-G followed by a number 1-7.")
+
+def update_board(board, target_board, row, col):
+    if target_board[row][col] == " ":
+        if board[row][col] == 'S':
+            board[row][col] = 'X'
+            target_board[row][col] = 'X'
+            print("It's a hit!")
+        else:
+            target_board[row][col] = 'O'
+            print("You missed!")
+    else:
+        print("You've already shot here. Your turn is skipped.")
